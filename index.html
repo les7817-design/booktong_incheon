@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>책통클럽 인천프리미엄관</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      background: #1a3a6b;
+      color: #fff;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: #f5c518; }
+    nav a {
+      color: #cdd8f0;
+      text-decoration: none;
+      margin-left: 28px;
+      font-size: 14px;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ── 히어로 ── */
+    .hero {
+      background: linear-gradient(135deg, #1a3a6b 0%, #2e6db4 60%, #5594d4 100%);
+      color: #fff;
+      text-align: center;
+      padding: 90px 20px 80px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: #f5c518;
+      color: #1a3a6b;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 em { color: #f5c518; font-style: normal; }
+    .hero p {
+      font-size: 18px;
+      opacity: .85;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-btns a {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      margin: 6px;
+    }
+    .btn-primary { background: #f5c518; color: #1a3a6b; }
+    .btn-outline { border: 2px solid #fff; color: #fff; }
+
+    /* ── 색상 띠 ── */
+    .color-bar {
+      height: 6px;
+      background: linear-gradient(to right, #e63329 25%, #f5c518 25% 50%, #4caf50 50% 75%, #2e6db4 75%);
+    }
+
+    /* ── 섹션 공통 ── */
+    section { padding: 70px 40px; max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #1a3a6b;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    /* ── 특징 카드 ── */
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card {
+      background: #f7f9fc;
+      border-radius: 12px;
+      padding: 32px 24px;
+      border-top: 4px solid #2e6db4;
+    }
+    .card .icon { font-size: 36px; margin-bottom: 14px; }
+    .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #1a3a6b; }
+    .card p { font-size: 14px; color: #555; line-height: 1.7; }
+
+    /* ── 커리큘럼 표 ── */
+    .curriculum-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    table thead th {
+      background: #1a3a6b;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: center;
+    }
+    table tbody tr:nth-child(even) { background: #f2f6fb; }
+    table tbody td {
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid #e0e8f0;
+      vertical-align: middle;
+    }
+    .tag {
+      display: inline-block;
+      background: #ddeeff;
+      color: #1a5fa3;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin: 2px;
+    }
+
+    /* ── 시간표 ── */
+    .timetable { display: flex; gap: 20px; flex-wrap: wrap; }
+    .time-card {
+      flex: 1; min-width: 200px;
+      background: #1a3a6b;
+      color: #fff;
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+    }
+    .time-card .class { font-size: 13px; opacity: .7; margin-bottom: 6px; }
+    .time-card .time { font-size: 22px; font-weight: 800; }
+    .time-card .desc { font-size: 12px; opacity: .7; margin-top: 6px; }
+
+    /* ── 공지 배너 ── */
+    .notice {
+      background: #fff8e1;
+      border-left: 5px solid #f5c518;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .notice h4 { font-size: 16px; color: #7a5800; margin-bottom: 8px; }
+    .notice ul { padding-left: 18px; font-size: 14px; color: #555; line-height: 1.9; }
+
+    /* ── 방학특강 그리드 ── */
+    .special-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .special-card {
+      border: 1px solid #d0dff0;
+      border-radius: 10px;
+      padding: 22px;
+    }
+    .special-card .num {
+      display: inline-block;
+      width: 28px; height: 28px;
+      background: #2e6db4;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .special-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #1a3a6b; }
+    .special-card p { font-size: 13px; color: #555; line-height: 1.7; }
+    .special-card .price {
+      font-size: 13px; font-weight: 700; color: #e63329; margin-top: 8px;
+    }
+
+    /* ── 학사일정 ── */
+    .schedule-note {
+      background: #f0f5ff;
+      border-radius: 10px;
+      padding: 24px 28px;
+      font-size: 14px;
+      color: #444;
+      line-height: 2;
+    }
+    .schedule-note strong { color: #1a3a6b; }
+
+    /* ── CTA ── */
+    .cta {
+      background: #1a3a6b;
+      color: #fff;
+      text-align: center;
+      padding: 70px 20px;
+    }
+    .cta h2 { font-size: 30px; font-weight: 800; margin-bottom: 12px; }
+    .cta p { font-size: 16px; opacity: .8; margin-bottom: 30px; }
+    .cta a {
+      display: inline-block;
+      background: #f5c518;
+      color: #1a3a6b;
+      padding: 14px 40px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      background: #111;
+      color: #888;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+    footer a { color: #aaa; text-decoration: none; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 30px; }
+      .features { grid-template-columns: 1fr; }
+      .special-grid { grid-template-columns: 1fr; }
+      header { flex-direction: column; height: auto; padding: 16px; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header>
+  <div class="logo"><span>책통</span>클럽 인천프리미엄관</div>
+  <nav>
+    <a href="#about">소개</a>
+    <a href="#curriculum">커리큘럼</a>
+    <a href="#special">방학특강</a>
+    <a href="#schedule">학사일정</a>
+    <a href="#contact">문의</a>
+  </nav>
+</header>
+
+<!-- 히어로 -->
+<div class="hero" id="about">
+  <div class="badge">독서의 힘! 책통클럽</div>
+  <h1>책으로 키우는<br /><em>진짜 실력</em></h1>
+  <p>단순 독서를 넘어 메타인지·정독법·비문학까지<br />체계적인 커리큘럼으로 학습력의 근본을 바꿉니다.</p>
+  <div class="hero-btns">
+    <a href="#special" class="btn-primary">방학특강 신청하기</a>
+    <a href="#curriculum" class="btn-outline">커리큘럼 보기</a>
+  </div>
+</div>
+<div class="color-bar"></div>
+
+<!-- 특징 -->
+<section>
+  <div class="section-title">책통클럽만의 3가지 강점</div>
+  <div class="section-sub">독서 전문 교육기관 책통클럽이 특별한 이유</div>
+  <div class="features">
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>메타인지 수업</h3>
+      <p>단순히 읽는 것을 넘어 자신의 이해도를 스스로 점검하는 메타인지 훈련으로 학습 효율을 극대화합니다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📖</div>
+      <h3>정독법 · 비문학</h3>
+      <p>수능과 내신 대비에 직결되는 정독법·비문학 단기특강으로 중·고등 독해력을 집중 강화합니다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>교과 연계 학습</h3>
+      <p>사회탐구·과학탐구·교과필독서 등 교과서와 직접 연결된 독서로 학교 성적까지 함께 올립니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 수업 시간표 -->
+<div style="background:#f7f9fc; padding: 50px 0;">
+  <section style="padding-top:0; padding-bottom:0;">
+    <div class="section-title">수업 시간표</div>
+    <div class="section-sub">A반(월/수) · B반(화/목) · C반(토) 운영</div>
+    <div class="timetable">
+      <div class="time-card">
+        <div class="class">1교시 (중등부)</div>
+        <div class="time">09:00 – 10:00</div>
+      </div>
+      <div class="time-card" style="background:#2e6db4;">
+        <div class="class">2교시 (아침독서 / 초 4–6학년)</div>
+        <div class="time">10:00 – 11:00</div>
+      </div>
+      <div class="time-card" style="background:#4c8fc8;">
+        <div class="class">3교시 (초등부 1–3학년)</div>
+        <div class="time">11:00 – 12:00</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#888; margin-top:16px;">※ 방학특강은 타임별 10~12명으로 소규모 진행 (선착순 조기마감 가능)</p>
+  </section>
+</div>
+
+<!-- 커리큘럼 -->
+<section id="curriculum">
+  <div class="section-title">정규 커리큘럼</div>
+  <div class="section-sub">학년별 맞춤 과목 안내</div>
+  <div class="curriculum-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>대상</th>
+          <th>주요 과목</th>
+          <th>수업 방식</th>
+          <th>특징</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">초 1·2학년</span></td>
+          <td>교과필독서</td>
+          <td>주 4회</td>
+          <td>메타인지 수업으로 선행</td>
+        </tr>
+        <tr>
+          <td><span class="tag">초 3·4학년</span></td>
+          <td>교과필독서 / 사건과 전개</td>
+          <td>주 4회</td>
+          <td>세계·한국전래문학 / 사자성어·속담풀이</td>
+        </tr>
+        <tr>
+          <td><span class="tag">초 4·5학년</span></td>
+          <td>사회탐구 / 과학탐구</td>
+          <td>주 4회</td>
+          <td>교과서 연계 학습 (각 12회)</td>
+        </tr>
+        <tr>
+          <td><span class="tag">초 5·6학년</span></td>
+          <td>조선 왕조 실록 / 통으로 꿰는 세계사</td>
+          <td>주 4회</td>
+          <td>중학대비 역사·세계사 전체 조망</td>
+        </tr>
+        <tr>
+          <td><span class="tag">초 6 – 중등</span></td>
+          <td>중등 교과서 작품 25단계</td>
+          <td>주 4회</td>
+          <td>정독법 후 메타인지 훈련 / 작품 분석</td>
+        </tr>
+        <tr>
+          <td><span class="tag">중 1 – 중 3</span></td>
+          <td>중등 교과 소설 작품 52단계</td>
+          <td>주 4회</td>
+          <td>교과 작품 정독 + 메타인지 훈련</td>
+        </tr>
+        <tr>
+          <td><span class="tag">초 3 – 중 3</span></td>
+          <td>공필왕 (국·사·과·한국사·세계사)</td>
+          <td>주 4회</td>
+          <td>매일반 한학기마스터 / 1–3과목 선택 가능</td>
+        </tr>
+        <tr>
+          <td><span class="tag">중 2 – 고 3</span></td>
+          <td>정독법 / 비문학 단기특강</td>
+          <td>집중 특강</td>
+          <td>수능·내신 비문학 완성 (방학 전용)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 방학특강 -->
+<div style="background:#f0f5ff; padding: 20px 0;">
+<section id="special">
+  <div class="section-title">2024 겨울방학 특강</div>
+  <div class="section-sub">1월 6일(월) – 2월 20일(목) / 매주 월·목 또는 월·수·금 주 4회</div>
+
+  <div class="notice">
+    <h4>안내 사항</h4>
+    <ul>
+      <li>전 학년 사자성어 &amp; 속담풀이 포함 / 일부 도서는 개별 구매 후 수업 참여</li>
+      <li>소규모 수업 (타임별 10~12명) · 선착순 조기마감 가능</li>
+      <li>특강 기간 중 1월 27일, 31일은 휴강</li>
+    </ul>
+  </div>
+
+  <div class="special-grid">
+    <div class="special-card">
+      <div class="num">1</div>
+      <h4>아침독서 (전학년)</h4>
+      <p>겨울방학 동안 책 30권 읽고 한 줄 서평쓰기 (단톡방에 인증샷 올리기)</p>
+      <div class="price">무료 · 18명 선착순</div>
+    </div>
+    <div class="special-card">
+      <div class="num">2</div>
+      <h4>사건과 전개 (초 3·4학년)</h4>
+      <p>세계·한국전래문학 / 사자성어·속담풀이</p>
+      <div class="price">주 4회 / 총 24회 · 36만원</div>
+    </div>
+    <div class="special-card">
+      <div class="num">3</div>
+      <h4>사회탐구·과학탐구 (초 4·5학년)</h4>
+      <p>사회탐구 12회 + 과학탐구 12회 / 교과서 연계 학습</p>
+      <div class="price">주 4회 / 총 24회 · 38만원</div>
+    </div>
+    <div class="special-card">
+      <div class="num">4</div>
+      <h4>중등 교과서 작품 25단계 (예비중등~중등)</h4>
+      <p>중등 교과서 작품 분석해보자!</p>
+      <div class="price">주 4회 / 총 24회 · 40만원</div>
+    </div>
+    <div class="special-card">
+      <div class="num">5</div>
+      <h4>조선 왕조 실록 (초 5~중등)</h4>
+      <p>조선사의 큰 줄기와 핵심보기 관점</p>
+      <div class="price">주 4회 / 총 12회 · 32만원</div>
+    </div>
+    <div class="special-card">
+      <div class="num">6</div>
+      <h4>통으로 꿰는 세계사 (초 5~중등)</h4>
+      <p>중학대비 세계사 전체 통으로 보기 관점</p>
+      <div class="price">주 4회 / 총 16회 · 36만원</div>
+    </div>
+    <div class="special-card">
+      <div class="num">7</div>
+      <h4>공필왕 (초 3~중 3)</h4>
+      <p>국·사·과·한국사·세계사 / 매일반 한학기마스터<br />1과목 53만원 / 2과목 98만원 / 3과목 138만원</p>
+      <div class="price">주 4회 / 총 24회 · 별도 안내</div>
+    </div>
+    <div class="special-card">
+      <div class="num">8</div>
+      <h4>정독법·비문학 단기특강 (중 3~고 2)</h4>
+      <p>방학에만 다닐 수 있는 학생 대상<br />정독법 → 하루 2시간 연달아 수업 / 비문학은 정독법 진행중인 책통이만 가능</p>
+      <div class="price">정독법 48회 60만원 / 비문학 24회 50만원</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- 학사일정 -->
+<section id="schedule">
+  <div class="section-title">2025 학사일정</div>
+  <div class="section-sub">책통클럽 인천프리미엄관 연간 일정 안내</div>
+  <div class="schedule-note">
+    <strong>봄학기</strong> 3월 개강 — 신규·재원생 등록 순차 진행<br />
+    <strong>어린이날 연휴</strong> 5월 초 휴강<br />
+    <strong>여름방학</strong> 7월 말 – 8월 방학특강 운영<br />
+    <strong>가을학기</strong> 9월 개강<br />
+    <strong>추석 연휴</strong> 10월 초 휴강<br />
+    <strong>겨울방학</strong> 12월 말 – 2월 방학특강 운영<br />
+    <strong>폼파티·블록</strong> 연말 이벤트 (12월)<br /><br />
+    ※ 상세 일자는 원내 게시판 및 단체 카카오톡방을 통해 공지됩니다.
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta" id="contact">
+  <h2>지금 바로 상담 신청하세요!</h2>
+  <p>책통클럽 인천프리미엄관에서 우리 아이의 독서력과 학습력을 함께 키워드립니다.</p>
+  <a href="https://www.booktong.kr" target="_blank">홈페이지 방문하기 →</a>
+</div>
+
+<!-- 푸터 -->
+<footer>
+  <p><strong style="color:#ccc;">책통클럽 인천프리미엄관</strong></p>
+  <p>독서의 힘! | <a href="https://www.booktong.kr" target="_blank">www.booktong.kr</a></p>
+  <p style="margin-top:10px;">© 2025 책통클럽. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
